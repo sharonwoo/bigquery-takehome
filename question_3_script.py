@@ -18,43 +18,59 @@ Design choice:  this script uses Github Actions to write the table upon push to 
 
 *______*
 
-Question:       Which country has the largest number of ports with a cargo_wharf? Your answer should include the columns country and port_count only.
-Answer:         US
-Design choice: return only 1 row with columns stating country and port_count only
+Question:       You receive a distress call from the middle of the North Atlantic Ocean. 
+                The person on the line gave you a coordinates of lat: 32.610982, long: -38.706256 and asked for the nearest port with provisions, water, fuel_oil and diesel. 
+                Your answer should include the columns country, port_name, port_latitude and port_longitude only.
+Answer:         HORTA is the name of the nearest port, please see tables for rest
+Design choice: return only 1 row with requested columns only
 Notes & assumptions:          
-                1. cargo wharf can take values of true, false, or null (2787, 7, 875). we assume only true values are ports with cargo wharves
-                2. assumption: duplicated port names are unique ports. 
-                   there are duplicates by port_name in US, CA, ID, AR but they have different column values and different indexes
-                   e.g. in AR, VILLA CONSTITUCION port name is duplicated but there are slight differences to the latlong, 
-                   and differences in the index number which is one of our clustering columns, so we assume it's different
-
+                1. provisions, water, fuel_oil and diesel can take values of true, false, or null (2787, 7, 875). we assume only true values represent ports which have any of these 
+                2. assumption: duplicated port names are unique ports (see question_2_script.py for working)
 '''
 
 client = bigquery.Client()
 
-table_id = "foodpanda-de-test-sharon.staging.question_2"
+table_id = "foodpanda-de-test-sharon.staging.question_3"
 
 # set write_truncate for testing; if necessary append author name to version tables if multiple contributors?
 job_config = bigquery.QueryJobConfig(destination=table_id, write_disposition="WRITE_TRUNCATE")
 
 sql = """
-    WITH cargo_wharves AS (
+    WITH geopoints AS (
         SELECT 
-            port_name,
             country,
-            cargo_wharf
-        FROM  `bigquery-public-data.geo_international_ports.world_port_index` 
-        WHERE DATE(_PARTITIONTIME) = "2019-09-24"
-        AND   cargo_wharf = true
+            port_name, 
+            port_geom, 
+            port_latitude,
+            port_longitude,
+            provisions,
+            water,
+            fuel_oil, 
+            diesel
+        FROM    `bigquery-public-data.geo_international_ports.world_port_index` 
+        WHERE   DATE(_PARTITIONTIME) = "2019-09-24"
+    ), 
+
+    distress_call AS (
+        SELECT 
+            'DISTRESS CALL' as port_name,
+            ST_GEOGPOINT(-38.706256, 32.610982) as distress_call
+    ), 
+
+    dataset AS (
+        SELECT 
+            geopoints.*,
+            distress_call.distress_call 
+        FROM      geopoints
+        LEFT JOIN distress_call
+               ON geopoints.port_name <> distress_call.port_name
     )
 
-    SELECT
-        country,
-        count(port_name) as port_count
-        FROM cargo_wharves
-    GROUP BY 1
-    ORDER BY port_count DESC
-    LIMIT 1
+    SELECT 
+        dataset.* EXCEPT(port_geom, distress_call), 
+        ST_DISTANCE(port_geom, distress_call) as distance_in_meters
+    FROM dataset
+    ORDER BY distance_in_meters ASC 
 """
 
 query_job = client.query(sql, job_config=job_config) 

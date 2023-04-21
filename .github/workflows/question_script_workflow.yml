@@ -36,11 +36,18 @@ jobs:
              **/*.yml
 
       - name: List all changed files
+        if:   steps.verify-changed-files.outputs.files_changed == 'true'
         run: |
             echo 'Changed files: ${{ steps.verify-changed-files.outputs.changed_files }}'
 
       - name: 'Run question 1 staging job in Python file'
+        if:   contains(steps.verify-changed-files.outputs.changed_files, 'question_1_script.py')
         run:  python question_1_script.py
 
       - name: 'Run question 2 staging job in Python file'
+        if:   contains(steps.verify-changed-files.outputs.changed_files, 'question_2_script.py')
         run:  python question_2_script.py
+
+      - name: 'Run question 3 staging job in Python file'
+        if:   contains(steps.verify-changed-files.outputs.changed_files, 'question_3_script.py')
+        run:  python question_3_script.py
