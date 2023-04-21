@@ -1,6 +1,8 @@
 name: run question 1 script and create table in staging
-on:
-  push
+on: 
+  push:
+    branches:
+      - dev/*
 jobs:
   connect-to-gcp-and-write-table-in-staging:
     runs-on: ubuntu-latest

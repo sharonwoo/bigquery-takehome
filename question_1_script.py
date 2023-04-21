@@ -3,6 +3,7 @@ from google.cloud import bigquery
 '''
 Requirement:    complete this exercise in Python
 Design choice:  use Python client, https://cloud.google.com/python/docs/reference/bigquery/latest
+                source code to figure out how to write tests later: https://github.com/googleapis/python-bigquery
                 use the boilerplate code without refactoring first; can create utility functions and classes later if time/ocd permits although not strictly required (e.g. for table_id, job_configs)
                 also need to figure out linting if time permits
 
@@ -21,7 +22,8 @@ client = bigquery.Client()
 
 table_id = "foodpanda-de-test-sharon.staging.question_1"
 
-job_config = bigquery.QueryJobConfig(destination=table_id)
+# set write_truncate for testing; if necessary append author name to version tables if multiple contributors?
+job_config = bigquery.QueryJobConfig(destination=table_id, write_disposition="WRITE_TRUNCATE")
 
 sql = """
     WITH geopoints AS (
@@ -59,8 +61,13 @@ sql = """
     LIMIT 5
 """
 
-query_job = client.query(sql) 
+query_job = client.query(sql, job_config=job_config) 
 query_job.result()
 
 print("Query results loaded to the table {}".format(table_id))
-print(type(query_job))
+
+# can use QueryJob row iterator results to write tests later
+# now, to print out the table results so no need to check in BQ
+print("The query data:")
+for row in query_job:
+    print(row)
