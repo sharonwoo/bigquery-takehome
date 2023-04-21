@@ -64,7 +64,7 @@ sql = """
         FROM      geopoints
         LEFT JOIN distress_call
                ON geopoints.port_name <> distress_call.port_name
-    )
+    ),
 
     all_ports_by_distance AS (
     	
@@ -73,7 +73,6 @@ sql = """
         ST_DISTANCE(port_geom, distress_call) as distance_in_meters
     FROM dataset
     ORDER BY distance_in_meters ASC 
-
     )
 
     SELECT 
