@@ -18,11 +18,15 @@ Design choice:  this script uses Github Actions to write the table upon push to 
 
 *______*
 
-Question:       What are the 5 nearest ports to Singapore's JURONG ISLAND port? (country = 'SG', port_name = 'JURONG ISLAND')
-                Your answer should include the columns port_name and distance_in_meters only.
-Design choice:  use LIMIT 5 to limit to 5 results
+Question:       Which country has the largest number of ports with a cargo_wharf? Your answer should include the columns country and port_count only.
+Answer:         US
+Design choice: return only 1 row with columns stating country and port_count only
 Notes & assumptions:          
-                1. assumption: duplicated port names are unique ports (see question_2_script.py notes for full reasoning)
+                1. cargo wharf can take values of true, false, or null (2787, 7, 875). we assume only true values are ports with cargo wharves
+                2. assumption: duplicated port names are unique ports. 
+                   there are duplicates by port_name in US, CA, ID, AR but they have different column values and different indexes
+                   e.g. in AR, VILLA CONSTITUCION port name is duplicated but there are slight differences to the latlong, 
+                   and differences in the index number which is one of our clustering columns, so we assume it's different
 
 '''
 
@@ -34,39 +38,23 @@ table_id = "foodpanda-de-test-sharon.staging.question_1"
 job_config = bigquery.QueryJobConfig(destination=table_id, write_disposition="WRITE_TRUNCATE")
 
 sql = """
-    WITH geopoints AS (
-        SELECT 
-            port_name, 
-            port_geom, 
-        FROM    `bigquery-public-data.geo_international_ports.world_port_index` 
-        WHERE   DATE(_PARTITIONTIME) >= "2019-09-24" ) -- Sep 24, 2019
-        , 
-
-        jurong_island AS (
+    WITH cargo_wharves AS (
         SELECT 
             port_name,
-            port_geom as jurong_island
-        FROM    geopoints
-        WHERE   port_name = 'JURONG ISLAND'
-        ), 
+            country,
+            cargo_wharf
+        FROM  `bigquery-public-data.geo_international_ports.world_port_index` 
+        WHERE DATE(_PARTITIONTIME) = "2019-09-24"
+        AND   cargo_wharf = true
+    )
 
-        dataset AS (
-        SELECT 
-            geopoints.port_name,
-            geopoints.port_geom,
-            jurong_island.jurong_island 
-        FROM        geopoints
-        LEFT JOIN   jurong_island
-               ON   geopoints.port_name <> jurong_island.port_name
-        )
-
-    SELECT 
-        port_name, 
-        ST_DISTANCE(port_geom, jurong_island) as distance_in_meters
-    FROM    dataset
-    WHERE   port_name != 'JURONG ISLAND'
-    ORDER BY distance_in_meters ASC 
-    LIMIT 5
+    SELECT
+        country,
+        count(port_name) as port_count
+        FROM cargo_wharves
+    GROUP BY 1
+    ORDER BY port_count DESC
+    LIMIT 1
 """
 
 query_job = client.query(sql, job_config=job_config) 
