@@ -66,14 +66,23 @@ sql = """
                ON geopoints.port_name <> distress_call.port_name
     )
 
+    all_ports_by_distance AS (
+    	
+    SELECT 
+        dataset.* EXCEPT(port_geom, distress_call), 
+        ST_DISTANCE(port_geom, distress_call) as distance_in_meters
+    FROM dataset
+    ORDER BY distance_in_meters ASC 
+
+    )
+
     SELECT 
         country, 
         port_name, 
         port_latitude,
         port_longitude
-    FROM dataset
+    FROM all_ports_by_distance
     WHERE (provisions AND water AND fuel_oil AND diesel)
-    ORDER BY distance_in_meters ASC 
     LIMIT 1
 """
 
