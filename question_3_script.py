@@ -18,17 +18,19 @@ Design choice:  this script uses Github Actions to write the table upon push to 
 
 *_______*
 
-Question:       What are the 5 nearest ports to Singapore's JURONG ISLAND port? (country = 'SG', port_name = 'JURONG ISLAND')
-                Your answer should include the columns port_name and distance_in_meters only.
-Design choice:  use LIMIT 5 to limit to 5 results
+Question:       You receive a distress call from the middle of the North Atlantic Ocean. 
+                The person on the line gave you a coordinates of lat: 32.610982, long: -38.706256 and asked for the nearest port with provisions, water, fuel_oil and diesel. 
+                Your answer should include the columns country, port_name, port_latitude and port_longitude only.
+Answer:         HORTA is the name of the nearest port, please see tables for rest
+Design choice: return only 1 row with requested columns only
 Notes & assumptions:          
-                1. assumption: duplicated port names are unique ports (see question_2_script.py notes for full reasoning)
-
+                1. provisions, water, fuel_oil and diesel can take values of true, false, or null (2787, 7, 875). we assume only true values represent ports which have any of these 
+                2. assumption: duplicated port names are unique ports (see question_2_script.py for working)
 '''
 
 client = bigquery.Client()
 
-table_id = "foodpanda-de-test-sharon.staging.question_1"
+table_id = "foodpanda-de-test-sharon.staging.question_3"
 
 # set write_truncate for testing; if necessary append author name to version tables if multiple contributors?
 job_config = bigquery.QueryJobConfig(destination=table_id, write_disposition="WRITE_TRUNCATE")
@@ -36,37 +38,51 @@ job_config = bigquery.QueryJobConfig(destination=table_id, write_disposition="WR
 sql = """
     WITH geopoints AS (
         SELECT 
+            country,
             port_name, 
             port_geom, 
+            port_latitude,
+            port_longitude,
+            provisions,
+            water,
+            fuel_oil, 
+            diesel
         FROM    `bigquery-public-data.geo_international_ports.world_port_index` 
-        WHERE   DATE(_PARTITIONTIME) >= "2019-09-24" ) -- Sep 24, 2019
-        , 
+        WHERE   DATE(_PARTITIONTIME) = "2019-09-24"
+    ), 
 
-        jurong_island AS (
+    distress_call AS (
         SELECT 
-            port_name,
-            port_geom as jurong_island
-        FROM    geopoints
-        WHERE   port_name = 'JURONG ISLAND'
-        ), 
+            'DISTRESS CALL' as port_name,
+            ST_GEOGPOINT(-38.706256, 32.610982) as distress_call
+    ), 
 
-        dataset AS (
+    dataset AS (
         SELECT 
-            geopoints.port_name,
-            geopoints.port_geom,
-            jurong_island.jurong_island 
-        FROM        geopoints
-        LEFT JOIN   jurong_island
-               ON   geopoints.port_name <> jurong_island.port_name
-        )
+            geopoints.*,
+            distress_call.distress_call 
+        FROM      geopoints
+        LEFT JOIN distress_call
+               ON geopoints.port_name <> distress_call.port_name
+    ),
+
+    all_ports_by_distance AS (
+    	
+    SELECT 
+        dataset.* EXCEPT(port_geom, distress_call), 
+        ST_DISTANCE(port_geom, distress_call) as distance_in_meters
+    FROM dataset
+    ORDER BY distance_in_meters ASC 
+    )
 
     SELECT 
+        country, 
         port_name, 
-        ST_DISTANCE(port_geom, jurong_island) as distance_in_meters
-    FROM    dataset
-    WHERE   port_name != 'JURONG ISLAND'
-    ORDER BY distance_in_meters ASC 
-    LIMIT 5
+        port_latitude,
+        port_longitude
+    FROM all_ports_by_distance
+    WHERE (provisions AND water AND fuel_oil AND diesel)
+    LIMIT 1
 """
 
 query_job = client.query(sql, job_config=job_config) 

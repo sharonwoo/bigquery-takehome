@@ -16,7 +16,7 @@ Design choice:  TBC - plan is to have any user submit a PR to create a table in 
 Requirement:    create a script which follows good software engineering practices that creates a BigQuery table in your personal Google Cloud Project
 Design choice:  this script uses Github Actions to write the table upon push to dev/*
 
-*______*
+*_______*
 
 Question:       Which country has the largest number of ports with a cargo_wharf? Your answer should include the columns country and port_count only.
 Answer:         US
@@ -32,7 +32,7 @@ Notes & assumptions:
 
 client = bigquery.Client()
 
-table_id = "foodpanda-de-test-sharon.staging.question_1"
+table_id = "foodpanda-de-test-sharon.staging.question_2"
 
 # set write_truncate for testing; if necessary append author name to version tables if multiple contributors?
 job_config = bigquery.QueryJobConfig(destination=table_id, write_disposition="WRITE_TRUNCATE")
