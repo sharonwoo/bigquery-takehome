@@ -16,7 +16,7 @@ Design choice:  TBC - plan is to have any user submit a PR to create a table in 
 Requirement:    create a script which follows good software engineering practices that creates a BigQuery table in your personal Google Cloud Project
 Design choice:  this script uses Github Actions to write the table upon push to dev/*
 
-*______*
+*_______*
 
 Question:       You receive a distress call from the middle of the North Atlantic Ocean. 
                 The person on the line gave you a coordinates of lat: 32.610982, long: -38.706256 and asked for the nearest port with provisions, water, fuel_oil and diesel. 

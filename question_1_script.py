@@ -16,7 +16,7 @@ Design choice:  TBC - plan is to have any user submit a PR to create a table in 
 Requirement:    create a script which follows good software engineering practices that creates a BigQuery table in your personal Google Cloud Project
 Design choice:  this script uses Github Actions to write the table upon push to dev/*
 
-*______*
+*_______*
 
 Question:       What are the 5 nearest ports to Singapore's JURONG ISLAND port? (country = 'SG', port_name = 'JURONG ISLAND')
                 Your answer should include the columns port_name and distance_in_meters only.
