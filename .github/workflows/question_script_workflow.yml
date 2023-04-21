@@ -1,4 +1,4 @@
-name: run question 1 script and create table in staging
+name: run all questions script and create tables in staging
 on: 
   push:
     branches:
@@ -28,5 +28,8 @@ jobs:
       - name: 'Install requirements from requirements.txt'
         run: pip install -r requirements.txt
 
-      - name: 'Run test job in Python file'
+      - name: 'Run question 1 staging job in Python file'
         run:  python question_1_script.py
+
+      - name: 'Run question 2 staging job in Python file'
+        run:  python question_2_script.py
