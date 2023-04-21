@@ -67,10 +67,14 @@ sql = """
     )
 
     SELECT 
-        dataset.* EXCEPT(port_geom, distress_call), 
-        ST_DISTANCE(port_geom, distress_call) as distance_in_meters
+        country, 
+        port_name, 
+        port_latitude,
+        port_longitude
     FROM dataset
+    WHERE (provisions AND water AND fuel_oil AND diesel)
     ORDER BY distance_in_meters ASC 
+    LIMIT 1
 """
 
 query_job = client.query(sql, job_config=job_config) 
