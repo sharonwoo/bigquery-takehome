@@ -28,16 +28,15 @@ jobs:
       - name: 'Install requirements from requirements.txt'
         run: pip install -r requirements.txt
 
-      - name: Verify Changed files
+      - name: Verify changed files and list all changes
         uses: tj-actions/verify-changed-files@v14.0.2
         with:
           files: |
              **/*.py
-
-      - name: List all changed files
+             **/*.yml
         run: |
-          echo "Changed files: ${{ steps.verify-changed-files.outputs.changed_files }}"
-
+          echo 'Changed .py and .yml files: ${{ steps.verify-changed-files.outputs.changed_files }}'
+          
       - name: 'Run question 1 staging job in Python file'
         run:  python question_1_script.py
 
