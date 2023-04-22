@@ -56,3 +56,6 @@ jobs:
       - name: 'Run question 3 staging job in Python file'
         if:   steps.changed-files-specific.outputs.any_changed == 'true'
         run:  python question_3_script.py
+
+      - name: 'Run tests on staging tables (to be moved to main?)'
+        run:  pytest tests.py
