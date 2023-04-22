@@ -9,7 +9,7 @@ class TestHelloWorld:
         assert "hello" in x
 
 class TestQuestion1:
-    question_1 = client.query("""SELECT * FROM foodpanda-de-test-sharon.staging.question_1""")
+    question_1 = client.query("SELECT * FROM foodpanda-de-test-sharon.staging.question_1")
     question_1.result()
 
     '''
@@ -19,8 +19,7 @@ class TestQuestion1:
     '''
 
     def test_question_1_table_total_rows(self, query_job=question_1): 
-        dict_query = dict(query_job)
-        assert len(dict_query) == 5
+        assert len(query_job._query_results._properties['totalRows']) == 5
 
     def test_question_1_table_total_columns(self, query_job=question_1): 
         assert len(query_job._query_results._properties['schema']['fields']) == 2
@@ -34,7 +33,7 @@ class TestQuestion1:
         assert query_job._query_results._properties['schema']['fields'][1]['name'] == 'distance_in_meters'
     
 class TestQuestion2:
-    question_2 = client.query("""SELECT * FROM foodpanda-de-test-sharon.staging.question_2""")
+    question_2 = client.query("SELECT * FROM foodpanda-de-test-sharon.staging.question_2")
     question_2.result()
     '''
         question 2 constraints: 
@@ -43,8 +42,7 @@ class TestQuestion2:
     '''
 
     def test_question_2_table_total_rows(self, query_job=question_2): 
-        dict_query = dict(query_job)
-        assert len(dict_query) == 1
+        assert len(query_job._query_results._properties['totalRows']) == 1
 
     def test_question_2_table_total_columns(self, query_job=question_2): 
         assert len(query_job._query_results._properties['schema']['fields']) == 2
@@ -54,7 +52,7 @@ class TestQuestion2:
         assert query_job._query_results._properties['schema']['fields'][1]['name'] == 'port_count'
 
 class TestQuestion3:
-    question_3 = client.query("""SELECT * FROM foodpanda-de-test-sharon.staging.question_3""")
+    question_3 = client.query("SELECT * FROM foodpanda-de-test-sharon.staging.question_3")
     question_3.result()
     '''
         question 3 constraints: 
@@ -63,8 +61,8 @@ class TestQuestion3:
     '''
 
     def test_question_3_table_length(self, query_job=question_3): 
-        dict_query = dict(query_job)
-        assert len(dict_query) == 1
+        # dict(query_job) returns error message ValueError: dictionary update sequence element #0 has length 4; 2 is required
+        assert len(query_job._query_results._properties['totalRows']) == 1
 
     def test_question_3_table_total_columns(self, query_job=question_3): 
         assert len(query_job._query_results._properties['schema']['fields']) == 4
