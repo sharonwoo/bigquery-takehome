@@ -29,6 +29,7 @@ def main(bigquery_project=bigquery_project):
             SELECT
                 port_name,
                 port_geom,
+                country
             FROM    `bigquery-public-data.geo_international_ports.world_port_index`
             WHERE   DATE(_PARTITIONTIME) >= "2019-09-24" ) -- Sep 24, 2019
             ,
