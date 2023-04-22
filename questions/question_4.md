@@ -1,9 +1,8 @@
 # Question 4
 
-```In your own words (short paragraphs conveying your thoughts), answer the following questions:
-a. What is refactoring? When and why should you refactor?
-b. What is testing? When and why should you write test cases?
-```
+> In your own words (short paragraphs conveying your thoughts), answer the following questions:
+>  a. What is refactoring? When and why should you refactor?
+> b. What is testing? When and why should you write test cases?
 
 ## On Refactoring
 
@@ -40,5 +39,5 @@ If you can get to the end without despairing, it lists down many of the reasons 
 
 ### When and why should you refactor? 
 
-![https://giphy.com/gifs/rebekah-mad-eye-moody-fGRLXXhta9eGtWAyvn](images/moody.gif)
+![https://giphy.com/gifs/rebekah-mad-eye-moody-fGRLXXhta9eGtWAyvn](/images/moody.gif)
 
