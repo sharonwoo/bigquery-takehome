@@ -39,6 +39,7 @@ def main(bigquery_project=bigquery_project):
                 port_geom as jurong_island
             FROM    geopoints
             WHERE   port_name = 'JURONG ISLAND'
+            AND     country = 'SG'
             ),
 
             dataset AS (
