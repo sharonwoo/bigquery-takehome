@@ -1,9 +1,9 @@
-name: 
-run-name: placeholder msg - merge to main by ${{ github.actor }} 🚀
+name: create tables in production on merge to main
+run-name: testing merge to main and creating production tables ${{ github.actor }} 🚀
 on: 
   push:
     branches:
-      - main
+      - dev/refactoring-for-d-r-y-modularity
 jobs:
   connect-to-gcp-and-write-table-in-staging:
     runs-on: ubuntu-latest
