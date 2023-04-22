@@ -60,7 +60,7 @@ class TestQuestion3:
             columns country, port_name, port_latitude and port_longitude only
     '''
 
-    def test_question_3_table_length(self, query_job=question_3): 
+    def test_question_3_table_total_rows(self, query_job=question_3): 
         # dict(query_job) returns error message ValueError: dictionary update sequence element #0 has length 4; 2 is required
         assert len(query_job._query_results._properties['totalRows']) == 1
 
