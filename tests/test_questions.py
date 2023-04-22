@@ -3,7 +3,7 @@ client = bigquery.Client()
 
 
 
-class test_hello_world:
+class TestHelloWorld:
     def test_hello_world(self):
         x = "hello world"
         assert "not" in x
