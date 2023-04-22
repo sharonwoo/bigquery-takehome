@@ -2,7 +2,8 @@
 
 ```In your own words (short paragraphs conveying your thoughts), answer the following questions:
 a. What is refactoring? When and why should you refactor?
-b. What is testing? When and why should you write test cases?```
+b. What is testing? When and why should you write test cases?
+```
 
 ## On Refactoring
 
