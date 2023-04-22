@@ -23,15 +23,15 @@ class TestQuestion1:
         assert len(dict_query) == 5
 
     def test_question_1_table_total_columns(self, query_job=question_1): 
-        assert len(question_1._query_results._properties['schema']['fields']) == 2
+        assert len(query_job._query_results._properties['schema']['fields']) == 2
 
     def test_question_1_column_names(self, query_job=question_1): 
         # get column names from properties 
         # https://stackoverflow.com/questions/55757039/how-to-get-column-name-from-bigquery-api
         # [{'name': 'port_name', 'type': 'STRING', 'mode': 'NULLABLE'}, {'name': 'distance_in_meters', 'type': 'FLOAT', 'mode': 'NULLABLE'}]
         # this also implicitly tests ordering. if no ordering is desired, use a set
-        assert question_1._query_results._properties['schema']['fields'][0]['name'] == 'port_name'
-        assert question_1._query_results._properties['schema']['fields'][1]['name'] == 'distance_in_meters'
+        assert query_job._query_results._properties['schema']['fields'][0]['name'] == 'port_name'
+        assert query_job._query_results._properties['schema']['fields'][1]['name'] == 'distance_in_meters'
     
 class TestQuestion2:
     question_2 = client.query("""SELECT * FROM foodpanda-de-test-sharon.staging.question_2""")
@@ -47,11 +47,11 @@ class TestQuestion2:
         assert len(dict_query) == 1
 
     def test_question_2_table_total_columns(self, query_job=question_2): 
-        assert len(question_2._query_results._properties['schema']['fields']) == 2
+        assert len(query_job._query_results._properties['schema']['fields']) == 2
 
     def test_question_2_column_names(self, query_job=question_2): 
-        assert question_2._query_results._properties['schema']['fields'][0]['name'] == 'country'
-        assert question_2._query_results._properties['schema']['fields'][1]['name'] == 'port_count'
+        assert query_job._query_results._properties['schema']['fields'][0]['name'] == 'country'
+        assert query_job._query_results._properties['schema']['fields'][1]['name'] == 'port_count'
 
 class TestQuestion3:
     question_3 = client.query("""SELECT * FROM foodpanda-de-test-sharon.staging.question_3""")
@@ -67,10 +67,10 @@ class TestQuestion3:
         assert len(dict_query) == 1
 
     def test_question_2_table_total_columns(self, query_job=question_3): 
-        assert len(question_2._query_results._properties['schema']['fields']) == 2
+        assert len(query_job._query_results._properties['schema']['fields']) == 2
 
     def test_question_3_column_names(self, query_job=question_3): 
-        assert question_3._query_results._properties['schema']['fields'][0]['name'] == 'country'
-        assert question_3._query_results._properties['schema']['fields'][1]['name'] == 'port_name'
-        assert question_3._query_results._properties['schema']['fields'][2]['name'] == 'port_latitude'
-        assert question_3._query_results._properties['schema']['fields'][3]['name'] == 'port_longitude'
+        assert query_job._query_results._properties['schema']['fields'][0]['name'] == 'country'
+        assert query_job._query_results._properties['schema']['fields'][1]['name'] == 'port_name'
+        assert query_job._query_results._properties['schema']['fields'][2]['name'] == 'port_latitude'
+        assert query_job._query_results._properties['schema']['fields'][3]['name'] == 'port_longitude'
