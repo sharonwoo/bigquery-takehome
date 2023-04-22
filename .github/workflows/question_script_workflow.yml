@@ -38,7 +38,7 @@ jobs:
             echo "$file was changed"
           done
 
-      - name: 'Get all changed Python files'
+      - name: 'Get all changed question files'
         id:   'changed-files-specific'
         uses: tj-actions/changed-files@v35
         with:
