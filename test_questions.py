@@ -62,12 +62,12 @@ class TestQuestion3:
             columns country, port_name, port_latitude and port_longitude only
     '''
 
-    def test_question_2_table_length(self, query_job=question_3): 
+    def test_question_3_table_length(self, query_job=question_3): 
         dict_query = dict(query_job)
         assert len(dict_query) == 1
 
-    def test_question_2_table_total_columns(self, query_job=question_3): 
-        assert len(query_job._query_results._properties['schema']['fields']) == 2
+    def test_question_3_table_total_columns(self, query_job=question_3): 
+        assert len(query_job._query_results._properties['schema']['fields']) == 4
 
     def test_question_3_column_names(self, query_job=question_3): 
         assert query_job._query_results._properties['schema']['fields'][0]['name'] == 'country'
