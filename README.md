@@ -41,11 +41,11 @@ I also considered other use cases:
 ### Fork this repo
 
 1. Update your `GOOGLE_APPLICATION_CREDENTIALS` in the repository secret with your own service account credentials.
-2. Update your `bigquery_project` in `settings.py` to point to your own project.
+2. Update your `bigquery_project` in `settings.py` to point to your own project. Make sure you have datasets called `staging` and `production` in your project as well. 
 
 ### If you really have to run the Python scripts locally
 
-I assume you have Python 3.10 or later installed and that you have [installed and configured gcloud CLI](https://cloud.google.com/sdk/docs/initializing). I cannot setup your local environment, troubleshooting may be needed. 
+I assume you have Python 3.10 or later installed and that you have [installed and configured gcloud CLI](https://cloud.google.com/sdk/docs/initializing). I cannot setup your local environment, troubleshooting may be needed. Make sure you have datasets called `staging` and `production` in your project as well. 
 
 ```
 # see venv docs: https://docs.python.org/3/library/venv.html
