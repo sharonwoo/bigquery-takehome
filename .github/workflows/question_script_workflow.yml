@@ -47,15 +47,15 @@ jobs:
 
       - name: 'Run question 1 staging job in Python file'
         if:   steps.changed-files-specific.outputs.any_changed == 'true'
-        run:  python question_1_script.py
+        run:  python questions/question_1_script.py
 
       - name: 'Run question 2 staging job in Python file'
         if:   steps.changed-files-specific.outputs.any_changed == 'true'
-        run:  python question_2_script.py
+        run:  python questions/question_2_script.py
 
       - name: 'Run question 3 staging job in Python file'
         if:   steps.changed-files-specific.outputs.any_changed == 'true'
-        run:  python question_3_script.py
+        run:  python questions/question_3_script.py
 
       - name: 'Run tests on staging tables (to be moved to main?)'
         run:  pytest test_questions.py
