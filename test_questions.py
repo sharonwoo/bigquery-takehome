@@ -3,12 +3,12 @@ client = bigquery.Client()
 
 
 
-class test_hello_world:
+class TestHelloWorld:
     def test_hello_world(self):
         x = "hello world"
         assert "hello" in x
 
-class test_question_1:
+class TestQuestion1:
     question_1 = client.query("""SELECT * FROM foodpanda-de-test-sharon.staging.question_1""")
     question_1.result()
 
@@ -33,7 +33,7 @@ class test_question_1:
         assert question_1._query_results._properties['schema']['fields'][0]['name'] == 'port_name'
         assert question_1._query_results._properties['schema']['fields'][1]['name'] == 'distance_in_meters'
     
-class test_question_2:
+class TestQuestion2:
     question_2 = client.query("""SELECT * FROM foodpanda-de-test-sharon.staging.question_2""")
     question_2.result()
     '''
@@ -53,7 +53,7 @@ class test_question_2:
         assert question_2._query_results._properties['schema']['fields'][0]['name'] == 'country'
         assert question_2._query_results._properties['schema']['fields'][1]['name'] == 'port_count'
 
-class test_question_3:
+class TestQuestion3:
     question_3 = client.query("""SELECT * FROM foodpanda-de-test-sharon.staging.question_3""")
     question_3.result()
     '''
