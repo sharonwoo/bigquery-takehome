@@ -43,7 +43,7 @@ jobs:
         uses: tj-actions/changed-files@v35
         with:
           files: | 
-            **/*.py 
+            questions/*.py 
 
       - name: 'Run question 1 staging job in Python file'
         if:   steps.changed-files-specific.outputs.any_changed == 'true'
