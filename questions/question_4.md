@@ -83,8 +83,8 @@ Always and even before the start, because it's fun?
 
 I personally find that having a comprehensive test suite also serves to make sure that requirements are properly gathered and expressed. 
 
+For example, the tests for this take home's BigQuery tables were easy to write because the requirements were clearly stated in terms of expected results for the tables created in questions 1-3. (Less explicit - should I even be doing CICD? But well it's fun so)
+
 ![govtech tdd coding dojo - that's me as an instructor](/images/govtech27may-codingdojo.jpg)
 
 More seriously, integrating testing into development aka **test-driven development** helps to ensure that whatever is in development works as expected before it is deployed into production. 
-
-Also, the tests for this take home were easy to write because the requirements were clearly stated in terms of expected results for the tables created in questions 1-3. 
