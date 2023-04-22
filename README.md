@@ -14,6 +14,16 @@ Also: [Link to BigQuery project](https://console.cloud.google.com/bigquery?proje
 ## How this repo is meant to be used by anyone
 
 1. Make a pull request which has a branch name prefixed with `dev/` to modify the questions scripts in the `questions` folder. For Q1-Q3 scripts, modifying any of them will create new tables for all 3 in `staging`.
+
+    ```
+    git clone 
+    git checkout -b dev/your-branch-name-here
+    # your changes to script files here
+    git add .
+    git commit -m 'your commit message here'
+    git push origin
+    ```
+
 2. **Make sure the tests pass**. Ping @sharonwoo if they do. 
 3. @sharonwoo will then review the code before it can be merged to `main`. Upon doing so, Q1-Q3 tables will be created in `production`. 
 
@@ -25,7 +35,8 @@ I also considered other use cases:
 2. Update your `bigquery_project` in `settings.py` to point to your own project.
 
 ### If you really have to run the Python scripts locally
-No guarantees it'll work, but I assume you have Python 3.10 or later installed and that you have [installed and configured gcloud CLI](https://cloud.google.com/sdk/docs/initializing).
+
+I assume you have Python 3.10 or later installed and that you have [installed and configured gcloud CLI](https://cloud.google.com/sdk/docs/initializing). I cannot setup your local environment, troubleshooting may be needed. 
 
 ```
 # see venv docs: https://docs.python.org/3/library/venv.html
