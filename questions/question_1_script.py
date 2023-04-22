@@ -1,5 +1,5 @@
 from google.cloud import bigquery
-from settings import project_name
+from settings import bigquery_project
 
 '''
 Question:       What are the 5 nearest ports to Singapore's JURONG ISLAND port?
@@ -15,7 +15,7 @@ Notes & assumptions:
 '''
 
 
-def main(bigquery_project=project_name):
+def main(bigquery_project=bigquery_environment):
     client = bigquery.Client()
     table_id = "{bigquery_project}.staging.question_1".format(
                                     bigquery_project=bigquery_project)
