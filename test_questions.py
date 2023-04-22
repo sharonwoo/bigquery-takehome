@@ -19,7 +19,7 @@ class TestQuestion1:
     '''
 
     def test_question_1_table_total_rows(self, query_job=question_1): 
-        assert query_job._query_results._properties['totalRows'] == 5
+        assert query_job._query_results._properties['totalRows'] == '5'
 
     def test_question_1_table_total_columns(self, query_job=question_1): 
         assert len(query_job._query_results._properties['schema']['fields']) == 2
@@ -42,7 +42,7 @@ class TestQuestion2:
     '''
 
     def test_question_2_table_total_rows(self, query_job=question_2): 
-        assert query_job._query_results._properties['totalRows'] == 1
+        assert query_job._query_results._properties['totalRows'] == '1'
 
     def test_question_2_table_total_columns(self, query_job=question_2): 
         assert len(query_job._query_results._properties['schema']['fields']) == 2
@@ -62,7 +62,7 @@ class TestQuestion3:
 
     def test_question_3_table_total_rows(self, query_job=question_3): 
         # dict(query_job) returns error message ValueError: dictionary update sequence element #0 has length 4; 2 is required
-        assert query_job._query_results._properties['totalRows'] == 1
+        assert query_job._query_results._properties['totalRows'] == '1'
 
     def test_question_3_table_total_columns(self, query_job=question_3): 
         assert len(query_job._query_results._properties['schema']['fields']) == 4
