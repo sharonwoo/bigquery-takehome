@@ -1,13 +1,13 @@
 # bigquery-takehome
 make pink home again (now with rudimentary cicd)
 
-## Index
+## Answers to take home
 
-* question 1 script
-* question 2 script
-* question 3 script
-* question 4 markdown
-* question 5 markdown
+* [question 1 script](https://github.com/sharonwoo/bigquery-takehome/blob/main/questions/question_1_script.py)
+* [question 2 script]((https://github.com/sharonwoo/bigquery-takehome/blob/main/questions/question_2_script.py))
+* [question 3 script]((https://github.com/sharonwoo/bigquery-takehome/blob/main/questions/question_3_script.py))
+* [question 4 markdown]
+* [question 5 markdown]
 * [BigQuery project](https://console.cloud.google.com/bigquery?project=foodpanda-de-test-sharon&ws=!1m4!1m3!3m2!1sfoodpanda-de-test-sharon!2sstaging)
 
 ## How this repo is meant to be used by anyone
@@ -15,6 +15,37 @@ make pink home again (now with rudimentary cicd)
 1. Make a pull request which has a branch name prefixed with `dev/` to modify the questions in the `questions` folder. For Q1-Q3 scripts, modifying any of them will create new tables for all 3 in `staging`.
 2. Make sure the tests pass. 
 3. @sharonwoo will review the code before it can be merged to `main`. Upon doing so, Q1-Q3 tables will be created in `production`. 
+
+I also considered other use cases: 
+
+### Fork this repo
+
+1. Update your `GOOGLE_APPLICATION_CREDENTIALS` in the repository secret with your own service account credentials.
+2. 
+
+### If you really have to run the Python scripts locally
+
+No guarantees it'll work, but I assume you have Python 3.10 or later installed and that you have (configured gcloud CLI)[https://cloud.google.com/sdk/docs/initializing].
+
+```
+# see venv docs: https://docs.python.org/3/library/venv.html
+# create a virtual environment 
+python -m venv /path/to/new/virtual/environment
+
+# activate virtual environment in zsh shell
+source <venv>/bin/activate
+
+# install requirements.txt
+pip install -r requirements.txt
+
+# change bigquery_project in questions/settings.py
+bigquery_project = 'your-project-name-here'
+
+# try running the scripts and test
+python questions/question_1_script.py
+pytest tests/test_questions.py
+
+```
 
 ## Requirements & design choices
 

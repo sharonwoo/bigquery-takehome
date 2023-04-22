@@ -1,9 +1,9 @@
 name: create tables in production on merge to main
-run-name: testing merge to main and creating production tables ${{ github.actor }} 🚀
+run-name: merge to main and creating production tables ${{ github.actor }} 🚀
 on: 
   push:
     branches:
-      - dev/refactoring-for-d-r-y-modularity
+      - main
 jobs:
   connect-to-gcp-and-write-table-in-staging:
     runs-on: ubuntu-latest
