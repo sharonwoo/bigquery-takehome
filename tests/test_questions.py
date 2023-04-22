@@ -3,10 +3,10 @@ client = bigquery.Client()
 
 
 
-class TestHelloWorld:
+class test_hello_world:
     def test_hello_world(self):
         x = "hello world"
-        assert "hello" in x
+        assert "not" in x
 
 class TestQuestion1:
     question_1 = client.query("SELECT * FROM foodpanda-de-test-sharon.staging.question_1")

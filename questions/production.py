@@ -27,3 +27,5 @@ def question_template(question):
 
 if __name__ == '__main__':
     question_template(question='question_1')
+    question_template(question='question_2')
+    question_template(question='question_3')

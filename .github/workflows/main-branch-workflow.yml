@@ -30,7 +30,9 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: 'Run tests on staging tables'
+        id:   tests
         run:  pytest tests/test_questions.py
 
-      - name: 'Copy tables over to main - placeholder, currently passes'
+      - name: 'Copy tables over to main - run only if passes tests in previous step'
+        if:   steps.tests.outcome == 'success'
         run:  python questions/production.py
