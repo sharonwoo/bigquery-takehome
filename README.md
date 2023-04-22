@@ -28,7 +28,7 @@ I also considered other use cases:
 ### Fork this repo
 
 1. Update your `GOOGLE_APPLICATION_CREDENTIALS` in the repository secret with your own service account credentials.
-2. 
+2. Update your `bigquery_project` in `settings.py` to point to your own project.
 
 ### If you really have to run the Python scripts locally
 
@@ -39,7 +39,7 @@ No guarantees it'll work, but I assume you have Python 3.10 or later installed a
 # create a virtual environment 
 python -m venv /path/to/new/virtual/environment
 
-# activate virtual environment in zsh shell
+# activate virtual environment in zsh shell, for other shells see documentation linked one step above as it may differ
 source <venv>/bin/activate
 
 # install requirements.txt
