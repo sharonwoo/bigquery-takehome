@@ -16,9 +16,18 @@ Also: [Link to BigQuery project](https://console.cloud.google.com/bigquery?proje
 1. Make a pull request which has a branch name prefixed with `dev/` to modify the questions scripts in the `questions` folder. For Q1-Q3 scripts, modifying any of them will create new tables for all 3 in `staging`.
 
     ```
-    git clone 
+    # clone the repository 
+    git clone git@github.com:sharonwoo/bigquery-takehome.git
+
+    # change directory to the repository
+    cd bigquery-takehome
+
+    # checkout your branch here
     git checkout -b dev/your-branch-name-here
+
     # your changes to script files here
+    
+    # add, commit and push changes to origin
     git add .
     git commit -m 'your commit message here'
     git push origin
