@@ -10,5 +10,5 @@ class TestClass:
     question_1.result()
 
     def test_question_1_table_length(self, query_job=question_1): 
-        dict_query = dict(question_1)
+        dict_query = dict(query_job)
         assert len(dict_query) == 5
