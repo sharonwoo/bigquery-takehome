@@ -2,18 +2,18 @@ from google.cloud import bigquery
 client = bigquery.Client()
 
 
-
 class TestHelloWorld:
     def test_hello_world(self):
         x = "hello world"
         assert "hello" in x
+
 
 class TestQuestion1:
     question_1 = client.query("SELECT * FROM foodpanda-de-test-sharon.staging.question_1")
     question_1.result()
 
     '''
-        question 1 constraints: 
+        question 1 constraints:
             5 nearest ports
             columns port_name and distance_in_meters only
     '''
@@ -31,7 +31,8 @@ class TestQuestion1:
         # this also implicitly tests ordering. if no ordering is desired, use a set
         assert query_job._query_results._properties['schema']['fields'][0]['name'] == 'port_name'
         assert query_job._query_results._properties['schema']['fields'][1]['name'] == 'distance_in_meters'
-    
+
+
 class TestQuestion2:
     question_2 = client.query("SELECT * FROM foodpanda-de-test-sharon.staging.question_2")
     question_2.result()
@@ -50,6 +51,7 @@ class TestQuestion2:
     def test_question_2_column_names(self, query_job=question_2): 
         assert query_job._query_results._properties['schema']['fields'][0]['name'] == 'country'
         assert query_job._query_results._properties['schema']['fields'][1]['name'] == 'port_count'
+
 
 class TestQuestion3:
     question_3 = client.query("SELECT * FROM foodpanda-de-test-sharon.staging.question_3")
