@@ -10,6 +10,13 @@ make pink home again (now with rudimentary cicd)
 * [question 5 markdown](https://github.com/sharonwoo/bigquery-takehome/blob/main/questions/question_5.md)
 * [BigQuery project](https://console.cloud.google.com/bigquery?project=foodpanda-de-test-sharon&ws=!1m4!1m3!3m2!1sfoodpanda-de-test-sharon!2sstaging)
 
+
+![Q1](/images/Q1.png)
+
+![Q2](/images/Q2.png)
+
+![Q3](/images/Q3.png)
+
 ## How this repo is meant to be used by anyone
 
 1. Make a pull request which has a branch name prefixed with `dev/` to modify the questions in the `questions` folder. For Q1-Q3 scripts, modifying any of them will create new tables for all 3 in `staging`.
