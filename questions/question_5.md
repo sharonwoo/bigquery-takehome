@@ -2,7 +2,7 @@
 
 > Have a browse of https://github.com/tiangolo/fastapi and write down how this repository is structured and why. What improvements do you think can be made?
 
-Possibly useful context: I've not actually used FastAPI before but have studied it and elected to use Django/drf over it and Flask for a previous exercise creating a backend API because Django/drf was very batteries-included and I found easier to use. 
+Possibly useful context: I've not actually used FastAPI before but have studied it and elected to use Django/drf over it and Flask for a previous exercise creating a backend API because Django/drf was very batteries-included (especially wrt authentication) and I found easier to use. 
 
 ## How repository is structured 
 
@@ -25,8 +25,12 @@ Possibly useful context: I've not actually used FastAPI before but have studied 
     * Many PRs are related to translations and documentation and do not appear to directly impact API functionality. 
     * Because there are so many outstanding PRs, it's hard to see what new functionality is being added, what needs to be fixed etc. 
     * Looking at PRs that are merged, @tiangolo appears to only be updating sponsor-related information and some submitted smal fixes around once a month. This is pretty demoralising if an issue is found and there may not be a fix for some time. 
-* Readme.md improvement: shorten, tighten focus. 
+* Readme.md improvement: shorten, tighten focus, add examples such as Dispatch by Netflix for examples of how FastAPI is used. 
     * At a glance, the `readme` covers where to find the documentation and source code, as well as which versions of Python it supports. This is great for developers. 
-    * It then segues into developer opinions and sponsors as well as reasons for use, which I understand might be important for continued funding, but which I found confusing. 
-    * It even advertises Typer which is something that might be new - don't remember this being there last year. 
-* Consolidate `docs` and `docs_src` folders into 1 folder (which might need some refactoring)
+    * It then segues into developer opinions and sponsors as well as reasons for use, which I understand might be important for continued funding, but which I found confusing. I thought [Dispatch](https://github.com/Netflix/dispatch), based on FastAPI, had a much cleaner readme. 
+    * This readme is reused in the documentation which I found extra confusing. 
+* Update documentation: 
+    * Consolidate `docs` and `docs_src` folders into 1 folder
+    * Update contributor guide - https://fastapi.tiangolo.com/contributing/
+        * The repo looks like it uses Poetry to manage dependencies, but .... in the developer guide it still recommends virtualenv and pip. Why? 
+        * Clearly highlight that tests for FastAPI are written against the code samples in the documentation 
