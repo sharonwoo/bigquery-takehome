@@ -2,9 +2,9 @@
 
 > In your own words (short paragraphs conveying your thoughts), answer the following questions:
 
-> a. What is refactoring? When and why should you refactor?
+> [a. What is refactoring? When and why should you refactor?](#what-is-refactoring-when-and-why-should-you-refactor)
 
-> b. What is testing? When and why should you write test cases?
+> [b. What is testing? When and why should you write test cases?](#what-is-testing-when-and-why-should-you-write-test-cases)
 
 ## What is refactoring? When and why should you refactor?
 
@@ -62,6 +62,11 @@ The below is not exhaustive but I think sums many of my own personal experiences
 | Implementing new features | To make the code base more extensible or to reduce complexity, making it easier to add new functionality in the future. |
 | Deprecation of critical dependencies | To ensure ongoing functionality of the system. |
 
+
+
+
+
+
 ## What is testing? When and why should you write test cases?
 
 ### What is testing? 
@@ -86,5 +91,7 @@ I personally find that having a comprehensive test suite also serves to make sur
 For example, the tests for this take home's BigQuery tables were easy to write because the requirements were clearly stated in terms of expected results for the tables created in questions 1-3. (Less explicit - should I even be doing CICD? But well it's fun so)
 
 ![govtech tdd coding dojo - that's me as an instructor](/images/govtech27may-codingdojo.jpg)
+
+Above is the closing of Govtech's 2021 TDD coding dojo where I was roped in as a last minute facilitator ૮ ˶ᵔ ᵕ ᵔ˶ ა
 
 More seriously, integrating testing into development aka **test-driven development** helps to ensure that whatever is in development works as expected before it is deployed into production. 
