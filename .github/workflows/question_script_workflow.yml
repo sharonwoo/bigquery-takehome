@@ -58,4 +58,4 @@ jobs:
         run:  python question_3_script.py
 
       - name: 'Run tests on staging tables (to be moved to main?)'
-        run:  pytest tests.py
+        run:  pytest test_questions.py
