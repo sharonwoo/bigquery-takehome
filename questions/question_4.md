@@ -83,7 +83,7 @@ Always and even before the start, because it's fun?
 
 I personally find that having a comprehensive test suite also serves to make sure that requirements are properly gathered and expressed. 
 
-![govtech tdd coding dojo - that's me](/images/govtech27may-codingdojo.jpg)
+![govtech tdd coding dojo - that's me as an instructor](/images/govtech27may-codingdojo.jpg)
 
 More seriously, integrating testing into development aka **test-driven development** helps to ensure that whatever is in development works as expected before it is deployed into production. 
 
