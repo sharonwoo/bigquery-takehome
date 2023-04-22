@@ -15,7 +15,7 @@ Notes & assumptions:
 '''
 
 
-def main(bigquery_project=bigquery_environment):
+def main(bigquery_project=bigquery_project):
     client = bigquery.Client()
     table_id = "{bigquery_project}.staging.question_1".format(
                                     bigquery_project=bigquery_project)
